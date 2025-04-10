@@ -13,15 +13,24 @@ function App() {
     if (file) {
       const date = await fetchUploadVideo(file)
 
-      console.log(date)
+      setVideoUrl(date.url)
     }
   }
 
   return (
-    <>
+    <div
+      style={{
+        width: '100vw',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 20,
+      }}
+    >
       <input type='file' accept='video/mkv,video/mpeg4' onChange={handleUpload} />
-      <HlsPlayer url={videoUrl!} />
-    </>
+      <HlsPlayer url={`http://localhost:3000${videoUrl}`} />
+    </div>
   )
 }
 

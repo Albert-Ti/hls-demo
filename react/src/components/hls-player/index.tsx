@@ -10,11 +10,11 @@ const HlsPlayer: React.FC<Props> = ({url}) => {
   const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {
-    if (!Hls.isSupported() || !videoRef.current || !url) return
+    if (!url) return
 
     const hls = new Hls()
     hls.loadSource(url)
-    hls.attachMedia(videoRef.current)
+    hls.attachMedia(videoRef.current!)
 
     hls.on(Hls.Events.MANIFEST_PARSED, () => {
       console.log('Manifest loaded')
@@ -37,7 +37,7 @@ const HlsPlayer: React.FC<Props> = ({url}) => {
       {isError ? (
         <p>Ошибка загрузки видео. Попробуйте позже.</p>
       ) : (
-        <video ref={videoRef} controls width='100%' height='auto' />
+        <video ref={videoRef} controls width='800px' height='auto' />
       )}
     </div>
   )
